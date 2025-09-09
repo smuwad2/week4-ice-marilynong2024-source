@@ -7,7 +7,7 @@
     
     <h2>Form Validation</h2>
 
-    <form name="inputForm" action="#" onsubmit="return validateForm('inputForm')" autocomplete="on" >
+    <form name="inputForm" action="#" onsubmit="return validateForm('inputForm')" autocomplete="on" > <!-- because this is an onsubmit button, it will not process to the next step when it has a return false, which means if the validateform function gives u a false then it wouldnt allow u to go on to the next step, if it is true then u can proceed to the next step -->
             ID: <input type="text" name="id" ><br>
             Age: <input type="number" name="age" ><br>
             Email: <input type="text" name="email" ><br>
@@ -22,9 +22,49 @@
                 // Invalid age: Age must be between 10 and 40.
                 // Invalid email: Email must contain the character @.
                 // Empty password: Password must be non-empty.
-                var errorMessages="";
+                // var errorMessages= [];
+                // if (formName['age'] > 40 && formName['age'] < 10){
+                //     errorMessages.push = "Age must be between 10 and 40."
+                // }
+                // else if (!formName['email'].include('@')){
+                //     errorMessages.push = "Email must contain the character @."
+                // }
+                // else if (formName['password'] == ""){
+                //     errorMessages.push = "Password must be non-empty."
+                // }
                 
-                
+                // for ( let errors of errorMessages){
+                //     console.log(errors)
+                // }
+
+                var errorMessages= "";
+                const form = document.forms[formName]; // provided if they are enclosed within the form
+                const idVal = form["id"].value; // or document.getElementsByName("id")[0].value; if dont have const form = document.forms[formName];
+                const ageVal = form['age'].value;
+                const emailVal = form['email'].value;
+                const pwVal = form['password'].value;
+
+                if (idVal.length > 10){
+                    errorMessages += "ID has a maximum length of 10 characters. \n";
+                }
+                if (ageVal > 40 || ageVal < 10){
+                    errorMessages += "Age must be between 10 and 40. \n"
+                }
+                if (!emailVal.includes('@')){ // or emailVal.indexOf('@') === -1
+                    errorMessages += "Email must contain the character @. \n"
+                }
+                if ( !pwVal || pwVal.length == 0){
+                    errorMessages += "Password must be non-empty. \n"
+                }
+
+                if (errorMessages.length==0){
+                    return true;
+                }
+                else{
+                    alert(errorMessages); // alert will show a pop up and user must press ok to dismiss it
+                }
+                return false;
+
             }
      
          </script>
