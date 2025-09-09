@@ -10,6 +10,7 @@
         }
 
         /* add CSS code here */
+
         
     </style>
 
@@ -26,6 +27,16 @@
     <script>
         var square=true;
        // add code here
+        function changeShape(){
+            const divElem = document.getElementById("div1");
+            if (square){
+                divElem.style.borderRadius = "50%"; // border radius controls the curve of the element’s corners. 50% is circle
+            }
+            else{
+                divElem.style.borderRadius = "0"; // if it is already a circle, revert back to the original square
+            }
+            square = !square; // set to the opposite value
+       }
         
     </script>
 
