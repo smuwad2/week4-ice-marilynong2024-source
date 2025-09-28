@@ -9,21 +9,76 @@
    <h1>Shopping List</h1>
    <p>Get it done today</p>
 
-   <input type="text" id="inputText">
+   <input id="userinput"  type="text" placeholder="enter items">
    <!-- add a button here for adding new item -->
+   <button id="enter" ">Enter</button>
 
-   <ul>
-      <li>Notebook<!--<button>Delete</button></li>-->
-      <li>Jello</li>
-      <li>Spinach</li>
-      <li>Rice</li>
-      <li>Birthday Cake</li>
-      <li>Candles</li>
+   <ul id="itemList">
+      <li>Notebook
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
+      <li>Jello
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
+      <li>Spinach
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
+      <li>Rice
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
+      <li>Birthday Cake
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
+      <li>Candles
+         <button onclick="remove(this.parentNode)">delete</button>
+      </li>
    </ul>
 
    <script>
 
       // add code here
+      const input = document.getElementById("userinput");
+      const button = document.getElementById("enter");
+      const list = document.getElementById("itemList");
+
+
+      button.addEventListener("click", () => {
+         addItem();
+      });
+
+      // press Enter key to add item
+      input.addEventListener("keypress", (event) => {
+         if (event.key === "Enter") {
+            addItem();
+         }
+      });
+
+      function addItem() {
+         const text = input.value.trim();
+         if (text !== "") {
+            const li = document.createElement("li");
+
+            // add text
+            const span = document.createElement("span");
+            span.textContent = text;
+
+            // add delete button
+            const delBtn = document.createElement("button");
+            delBtn.textContent = "delete";
+            delBtn.addEventListener("click", () => li.remove());
+
+            // build li
+            li.appendChild(span);
+            li.appendChild(delBtn);
+
+            list.appendChild(li);
+            input.value = "";
+         }
+      }
+
+      function remove(obj) {
+         obj.remove();
+      }
 
    </script>
 
